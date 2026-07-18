@@ -1,0 +1,227 @@
+# Seplos BMS 3.0 (Mason/10E) via Modbus RTU — paste into configuration.yaml
+# Adjust `port:` to your adapter (Settings -> System -> Hardware -> All Hardware)
+# and `slave:` to your DIP switch address (all OFF = 0).
+modbus:
+  - name: seplos_bms
+    type: serial
+    port: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_XXXXXXXX-if00-port0
+    baudrate: 19200
+    bytesize: 8
+    parity: N
+    stopbits: 1
+    method: rtu
+    sensors:
+      - name: "Seplos Pack Spannung"
+        unique_id: seplos_pack_spannung
+        slave: 0
+        address: 4096
+        input_type: input
+        unit_of_measurement: V
+        device_class: voltage
+        scale: 0.01
+        precision: 2
+        scan_interval: 10
+      - name: "Seplos Pack Strom"
+        unique_id: seplos_pack_strom
+        slave: 0
+        address: 4097
+        input_type: input
+        data_type: int16
+        unit_of_measurement: A
+        device_class: current
+        scale: 0.01
+        precision: 2
+        scan_interval: 10
+      - name: "Seplos Restkapazitaet"
+        unique_id: seplos_restkapazitaet
+        slave: 0
+        address: 4098
+        input_type: input
+        unit_of_measurement: Ah
+        scale: 0.01
+        precision: 1
+        scan_interval: 60
+      - name: "Seplos SOC"
+        unique_id: seplos_soc
+        slave: 0
+        address: 4101
+        input_type: input
+        unit_of_measurement: "%"
+        device_class: battery
+        scale: 0.1
+        precision: 1
+        scan_interval: 30
+      - name: "Seplos SOH"
+        unique_id: seplos_soh
+        slave: 0
+        address: 4102
+        input_type: input
+        unit_of_measurement: "%"
+        scale: 0.1
+        precision: 1
+        scan_interval: 600
+      - name: "Seplos Zyklen"
+        unique_id: seplos_zyklen
+        slave: 0
+        address: 4103
+        input_type: input
+        scan_interval: 600
+      - name: "Seplos Zelle 1"
+        unique_id: seplos_zelle_1
+        slave: 0
+        address: 4352
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 2"
+        unique_id: seplos_zelle_2
+        slave: 0
+        address: 4353
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 3"
+        unique_id: seplos_zelle_3
+        slave: 0
+        address: 4354
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 4"
+        unique_id: seplos_zelle_4
+        slave: 0
+        address: 4355
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 5"
+        unique_id: seplos_zelle_5
+        slave: 0
+        address: 4356
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 6"
+        unique_id: seplos_zelle_6
+        slave: 0
+        address: 4357
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 7"
+        unique_id: seplos_zelle_7
+        slave: 0
+        address: 4358
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 8"
+        unique_id: seplos_zelle_8
+        slave: 0
+        address: 4359
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 9"
+        unique_id: seplos_zelle_9
+        slave: 0
+        address: 4360
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 10"
+        unique_id: seplos_zelle_10
+        slave: 0
+        address: 4361
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 11"
+        unique_id: seplos_zelle_11
+        slave: 0
+        address: 4362
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 12"
+        unique_id: seplos_zelle_12
+        slave: 0
+        address: 4363
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 13"
+        unique_id: seplos_zelle_13
+        slave: 0
+        address: 4364
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 14"
+        unique_id: seplos_zelle_14
+        slave: 0
+        address: 4365
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 15"
+        unique_id: seplos_zelle_15
+        slave: 0
+        address: 4366
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos Zelle 16"
+        unique_id: seplos_zelle_16
+        slave: 0
+        address: 4367
+        input_type: input
+        unit_of_measurement: mV
+        scan_interval: 30
+      - name: "Seplos MOSFET Temp"
+        unique_id: seplos_mosfet_temp
+        slave: 0
+        address: 4376
+        input_type: input
+        unit_of_measurement: "°C"
+        device_class: temperature
+        scale: 0.1
+        offset: -273.15
+        precision: 1
+        scan_interval: 30
+      - name: "Seplos Umgebungs-Temp"
+        unique_id: seplos_umgebungs_temp
+        slave: 0
+        address: 4377
+        input_type: input
+        unit_of_measurement: "°C"
+        device_class: temperature
+        scale: 0.1
+        offset: -273.15
+        precision: 1
+        scan_interval: 60
+    binary_sensors:
+      - name: "Seplos Discharge FET"
+        unique_id: seplos_discharge_fet
+        slave: 0
+        address: 4728
+        input_type: coil
+        scan_interval: 10
+      - name: "Seplos Charge FET"
+        unique_id: seplos_charge_fet
+        slave: 0
+        address: 4729
+        input_type: coil
+        scan_interval: 10
+      - name: "Seplos entlaedt"
+        unique_id: seplos_entlaedt
+        slave: 0
+        address: 4672
+        input_type: coil
+        scan_interval: 10
+      - name: "Seplos laedt"
+        unique_id: seplos_laedt
+        slave: 0
+        address: 4673
+        input_type: coil
+        scan_interval: 10
