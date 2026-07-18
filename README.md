@@ -93,9 +93,9 @@ Existing solutions are great but heavier:
 
 ```
 $ python3 seplos_read.py
-Pack:   53.30 V  +0.00 A  SOC 96.3 %  SOH 99.8 %  Zyklen 19
-Zellen: 3330–3333 mV  (Delta 3 mV)
-Status: Discharge-FET=AN  Charge-FET=AN
+Pack:   53.30 V  +0.00 A  SOC 96.3 %  SOH 99.8 %  Cycles 19
+Cells:  3330–3333 mV  (delta 3 mV)
+Status: Discharge-FET=ON  Charge-FET=ON
 ```
 
 ## License

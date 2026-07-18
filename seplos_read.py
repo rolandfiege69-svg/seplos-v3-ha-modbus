@@ -35,7 +35,7 @@ def read_regs(p, func, reg, cnt):
     time.sleep(0.3)
     rx = p.read(300)
     if len(rx) < 5 or rx[1] & 0x80:
-        raise IOError(f"Fehler bei Register {reg:#06x}: {rx.hex() or 'keine Antwort'}")
+        raise IOError(f"Error at register {reg:#06x}: {rx.hex() or 'no reply'}")
     n = rx[2]
     return rx[3:3 + n]
 
@@ -63,24 +63,24 @@ def dump(p):
 
     pic = read_regs(p, 1, 0x1200, 0x90)
 
-    print(f"Pack:   {volt:.2f} V  {curr:+.2f} A  SOC {soc:.1f} %  SOH {soh:.1f} %  Zyklen {cyc}")
-    print(f"Kapa:   {rest:.2f} / {total:.2f} Ah")
-    print(f"Zellen: {min(cells)}–{max(cells)} mV  (Delta {max(cells) - min(cells)} mV)")
+    print(f"Pack:   {volt:.2f} V  {curr:+.2f} A  SOC {soc:.1f} %  SOH {soh:.1f} %  Cycles {cyc}")
+    print(f"Cap:    {rest:.2f} / {total:.2f} Ah")
+    print(f"Cells:  {min(cells)}–{max(cells)} mV  (delta {max(cells) - min(cells)} mV)")
     print(f"        {cells}")
-    print(f"Temp:   Zellen {['%.1f' % t for t in temps]} °C  MOSFET {t_mos:.1f} °C  Umgebung {t_env:.1f} °C")
+    print(f"Temp:   cells {['%.1f' % t for t in temps]} °C  MOSFET {t_mos:.1f} °C  ambient {t_env:.1f} °C")
     state = pic[15] if len(pic) > 15 else None
     if state is not None:
-        print(f"Status: Byte15=0x{state:02X}  Discharge-FET={'AN' if state & 1 else 'AUS'}  "
-              f"Charge-FET={'AN' if state & 2 else 'AUS'}  (Bit6={'1' if state & 0x40 else '0'})")
+        print(f"Status: Byte15=0x{state:02X}  Discharge-FET={'ON' if state & 1 else 'OFF'}  "
+              f"Charge-FET={'ON' if state & 2 else 'OFF'}  (Bit6={'1' if state & 0x40 else '0'})")
     alarm_bytes = pic[:15]
     set_bits = [(i * 8 + b) for i, byte in enumerate(alarm_bytes) for b in range(8) if byte >> b & 1]
-    print(f"Alarm-/Statusbits (Coil-Offsets): {set_bits or 'keine'}")
+    print(f"Alarm/status bits (coil offsets): {set_bits or 'none'}")
 
 
 def main():
     ports = sorted(glob.glob("/dev/cu.usbserial*") + glob.glob("/dev/ttyUSB*"))
     if not ports:
-        sys.exit("Kein Adapter gefunden")
+        sys.exit("No USB-RS485 adapter found")
     with serial.Serial(ports[0], BAUD, timeout=0.6) as p:
         if "--watch" in sys.argv:
             while True:
